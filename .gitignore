@@ -11,7 +11,3 @@ build/
 *.tsbuildinfo
 mcp-stdout.txt
 mcp-stderr.txt
-
-# local deploy keys
-gha_vm_deploy
-gha_vm_deploy.pub

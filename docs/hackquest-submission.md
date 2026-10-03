@@ -9,7 +9,6 @@ AgntPymt
 Governed payments for AI agents: spending limits, human approvals and kill switches enforced on Arbitrum, settled in USDC over x402.
 
 ## Links
-- Live app: https://agntpymt.com
 - Repo: https://github.com/SumitShinde0702/agntpymt-arbitrum
 - AgentSpendPolicy (Arbitrum Sepolia): TODO `https://sepolia.arbiscan.io/address/0x...`
 - AgentSpendPolicy (Robinhood Chain testnet): TODO `https://explorer.testnet.chain.robinhood.com/address/0x...`

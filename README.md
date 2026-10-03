@@ -1,7 +1,5 @@
 # AgntPymt — governed payments for AI agents, on Arbitrum
 
-**Live:** [agntpymt.com](https://agntpymt.com)
-
 AI agents can now buy things on their own: API calls, data, SaaS, and invoices. Companies won't hand an LLM a funded wallet without the same controls they use for employees: spending limits, approvals, a kill switch, and an audit trail. AgntPymt is that control plane. Agents negotiate with sellers and pay in USDC over [x402](https://x402.org). Every spend is authorized, approved, and recorded by an **on-chain policy contract on Arbitrum**.
 
 ## Why Arbitrum
@@ -121,12 +119,6 @@ One `hermes gateway` process uses **one** `HERMES_HOME` at startup. All agent pr
 For full per-agent runtime isolation later: one gateway per org, subprocess per run with `HERMES_HOME=profile_path`, or Hermes per-run profile APIs.
 
 See `docs/hermes-mcp.example.json` for a manual MCP reference (AgntPymt auto-writes this into each agent profile).
-
-## Production deploy
-
-Manual deploy on a VM (Docker): [`deploy/vm/README.md`](deploy/vm/README.md)
-
-Optional GCP infra (Cloud SQL, GCS, Hermes VM): [`deploy/gcp/README.md`](deploy/gcp/README.md)
 
 ## Demo flows
 

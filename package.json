@@ -17,7 +17,6 @@
     "db:up": "docker compose -f deploy/docker/docker-compose.postgres.yml up -d",
     "db:down": "docker compose -f deploy/docker/docker-compose.postgres.yml down",
     "db:ensure": "npm run ensure -w db",
-    "gcp:bootstrap": "bash deploy/gcp/bootstrap.sh",
     "start:prod": "npm run db:migrate && npm run db:seed && npm run start -w server",
     "db:generate": "npm run generate -w db",
     "db:migrate": "npm run migrate -w db",

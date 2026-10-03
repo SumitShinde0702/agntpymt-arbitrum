@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="320" viewBox="0 0 1200 320" role="img" aria-label="AgntPymt: governed payments for AI agents, enforced on Arbitrum">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#020617"/>
+      <stop offset="1" stop-color="#0b2d5c"/>
+    </linearGradient>
+    <linearGradient id="text" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00a8e8">
+        <animate attributeName="stop-color" values="#00a8e8;#a5f3fc;#00a8e8" dur="6s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="1" stop-color="#a5f3fc">
+        <animate attributeName="stop-color" values="#a5f3fc;#00a8e8;#a5f3fc" dur="6s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0" r="0.8">
+      <stop offset="0" stop-color="#00a8e8" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#00a8e8" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="top"><rect x="0" y="0" width="64" height="32"/></clipPath>
+    <clipPath id="bot"><rect x="0" y="32" width="64" height="32"/></clipPath>
+  </defs>
+
+  <rect width="1200" height="320" rx="24" fill="url(#bg)"/>
+  <rect width="1200" height="320" rx="24" fill="url(#glow)"/>
+
+  <g stroke="#00a8e8" stroke-opacity="0.08">
+    <path d="M0 80H1200M0 160H1200M0 240H1200"/>
+    <path d="M150 0V320M300 0V320M450 0V320M600 0V320M750 0V320M900 0V320M1050 0V320"/>
+  </g>
+
+  <g fill="none" stroke="#00a8e8" stroke-width="2" stroke-linecap="round">
+    <path d="M90 270 C 300 200, 500 300, 700 230 S 1050 200, 1140 250" stroke-opacity="0.25"/>
+    <circle r="5" fill="#00a8e8" stroke="none">
+      <animateMotion dur="5s" repeatCount="indefinite" path="M90 270 C 300 200, 500 300, 700 230 S 1050 200, 1140 250"/>
+    </circle>
+    <circle r="4" fill="#a5f3fc" stroke="none">
+      <animateMotion dur="5s" begin="1.7s" repeatCount="indefinite" path="M90 270 C 300 200, 500 300, 700 230 S 1050 200, 1140 250"/>
+    </circle>
+    <circle r="3" fill="#34d399" stroke="none">
+      <animateMotion dur="5s" begin="3.4s" repeatCount="indefinite" path="M90 270 C 300 200, 500 300, 700 230 S 1050 200, 1140 250"/>
+    </circle>
+  </g>
+
+  <g transform="translate(110 70) scale(2.4)">
+    <g clip-path="url(#top)">
+      <path d="M32 5 L53 17.5 L53 42.5 L32 55 L11 42.5 L11 17.5 Z" fill="none" stroke="#00a8e8" stroke-width="4.5" stroke-linejoin="round"/>
+    </g>
+    <g clip-path="url(#bot)">
+      <path d="M32 5 L53 17.5 L53 42.5 L32 55 L11 42.5 L11 17.5 Z" fill="none" stroke="#5ec8f0" stroke-width="4.5" stroke-linejoin="round"/>
+    </g>
+    <rect x="20" y="17" width="24" height="18" rx="5" fill="#e8f7fc"/>
+    <rect x="25" y="23" width="5" height="7" rx="2.5" fill="#0b2d5c">
+      <animate attributeName="height" values="7;1;7" keyTimes="0;0.05;0.1" dur="4s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="34" y="23" width="5" height="7" rx="2.5" fill="#0b2d5c">
+      <animate attributeName="height" values="7;1;7" keyTimes="0;0.05;0.1" dur="4s" repeatCount="indefinite"/>
+    </rect>
+    <circle cx="32" cy="44" r="9" fill="#00a8e8">
+      <animate attributeName="r" values="9;10.5;9" dur="2.4s" repeatCount="indefinite"/>
+    </circle>
+    <text x="32" y="48.5" text-anchor="middle" font-size="13" font-weight="700" font-family="Inter, Segoe UI, system-ui, sans-serif" fill="#fff">$</text>
+  </g>
+
+  <text x="330" y="140" font-family="Inter, Segoe UI, system-ui, sans-serif" font-size="72" font-weight="800" fill="#ffffff">Agnt<tspan fill="url(#text)">Pymt</tspan></text>
+  <text x="333" y="190" font-family="Inter, Segoe UI, system-ui, sans-serif" font-size="26" font-weight="500" fill="#cbd5e1">Governed payments for AI agents, enforced on Arbitrum.</text>
+  <text x="333" y="226" font-family="Inter, Segoe UI, system-ui, sans-serif" font-size="18" fill="#64748b">Spend policy · Agent identity · Human approvals · Immutable audit</text>
+</svg>

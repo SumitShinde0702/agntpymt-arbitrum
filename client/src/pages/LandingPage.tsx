@@ -30,7 +30,7 @@ const features = [
     icon: Zap,
     title: "x402 micropayments",
     description:
-      "HTTP-native payments via x402 on Base — settle in USDC for API calls, data, and vendor services.",
+      "HTTP-native payments via x402 on Arbitrum — settle in USDC for API calls, data, and vendor services.",
   },
   {
     icon: Bot,
@@ -115,7 +115,7 @@ export function LandingPage() {
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-400">
               AgntPymt is the payments and policy layer for AI agents — wallet provisioning,
-              spending limits, approval workflows, and x402 payments on Base.
+              spending limits, approval workflows, and x402 payments on Arbitrum.
             </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
@@ -137,7 +137,7 @@ export function LandingPage() {
                 <Lock className="h-4 w-4" /> Policy-first architecture
               </span>
               <span className="flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4" /> x402 + Base Sepolia
+                <CheckCircle2 className="h-4 w-4" /> x402 + Arbitrum
               </span>
               <span className="flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4" /> Full audit trail
@@ -230,7 +230,7 @@ export function LandingPage() {
       <footer className="border-t border-white/10 px-6 py-8">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 text-sm text-slate-500 sm:flex-row">
           <span>© {new Date().getFullYear()} AgntPymt — MVP demo</span>
-          <span>Built for agentic commerce on Base</span>
+          <span>Built for agentic commerce on Arbitrum</span>
         </div>
       </footer>
     </div>

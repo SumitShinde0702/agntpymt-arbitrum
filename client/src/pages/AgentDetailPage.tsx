@@ -89,7 +89,7 @@ export function AgentDetailPage() {
   const { agentId } = useParams<{ agentId: string }>();
   const [tab, setTab] = useState<Tab>("overview");
   const [agent, setAgent] = useState<AgentWalletRow | null>(null);
-  const [network, setNetwork] = useState("Base Sepolia");
+  const [network, setNetwork] = useState("Arbitrum Sepolia");
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [policy, setPolicy] = useState<AgentPolicy | undefined>();
   const [hermes, setHermes] = useState<HermesProfileStatus | null>(null);

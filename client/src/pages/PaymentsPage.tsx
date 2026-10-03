@@ -76,7 +76,7 @@ export function PaymentsPage() {
         <div>
           <h1 className="text-2xl font-bold text-slate-900">Payments</h1>
           <p className="mt-1 text-slate-500">
-            All agent settlements — x402 USDC on Base Sepolia with on-chain seller ratings.
+            All agent settlements — x402 USDC on Arbitrum Sepolia with on-chain seller ratings.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">

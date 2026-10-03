@@ -58,13 +58,13 @@ export const reputationRegistryAbi = [
 ] as const;
 
 export function nftExplorerUrl(agentId: string) {
-  return `https://sepolia.basescan.org/nft/${ERC8004_IDENTITY_REGISTRY}/${agentId}`;
+  return `https://sepolia.arbiscan.io/nft/${ERC8004_IDENTITY_REGISTRY}/${agentId}`;
 }
 
 export function registryExplorerUrl() {
-  return `https://sepolia.basescan.org/address/${ERC8004_IDENTITY_REGISTRY}`;
+  return `https://sepolia.arbiscan.io/address/${ERC8004_IDENTITY_REGISTRY}`;
 }
 
 export function reputationRegistryExplorerUrl() {
-  return `https://sepolia.basescan.org/address/${ERC8004_REPUTATION_REGISTRY}`;
+  return `https://sepolia.arbiscan.io/address/${ERC8004_REPUTATION_REGISTRY}`;
 }

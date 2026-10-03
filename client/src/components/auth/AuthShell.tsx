@@ -50,7 +50,7 @@ export function AuthShell({
       <div className="relative z-10 w-full max-w-[400px]">{children}</div>
 
       <p className="relative z-10 mt-8 text-center text-xs text-slate-500">
-        Policy-gated agent payments on Base · Secured by Clerk
+        Policy-gated agent payments on Arbitrum · Secured by Clerk
       </p>
     </div>
   );

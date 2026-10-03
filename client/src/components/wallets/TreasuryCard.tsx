@@ -4,7 +4,7 @@ import { AlertTriangle, Crown } from "lucide-react";
 import { formatUnits } from "viem";
 import { api, type WalletsOverview } from "../../lib/api";
 import { erc20Abi } from "../../lib/erc20";
-import { TARGET_CHAIN, USDC_BASE_SEPOLIA } from "../../lib/wagmi";
+import { TARGET_CHAIN, USDC_ADDRESS } from "../../lib/wagmi";
 
 type Props = {
   treasury: WalletsOverview["treasury"];
@@ -25,7 +25,7 @@ export function TreasuryCard({ treasury, onUpdate }: Props) {
     query: { enabled: !!displayAddress },
   });
   const { data: usdcRaw } = useReadContract({
-    address: USDC_BASE_SEPOLIA,
+    address: USDC_ADDRESS,
     abi: erc20Abi,
     functionName: "balanceOf",
     args: displayAddress ? [displayAddress as `0x${string}`] : undefined,
@@ -57,7 +57,7 @@ export function TreasuryCard({ treasury, onUpdate }: Props) {
         <h2 className="text-lg font-semibold text-slate-900">Treasury Wallet</h2>
       </div>
       <p className="mb-4 text-sm text-slate-600">
-        Connect your company MetaMask once. Use it to fund agent operational wallets on Base Sepolia.
+        Connect your company MetaMask once. Use it to fund agent operational wallets on Arbitrum Sepolia.
       </p>
 
       {treasury?.address && (
@@ -87,7 +87,7 @@ export function TreasuryCard({ treasury, onUpdate }: Props) {
         <div className="mb-4 flex items-start gap-2 rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800">
           <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
           <div>
-            <p className="font-medium">Switch to Base Sepolia</p>
+            <p className="font-medium">Switch to Arbitrum Sepolia</p>
             <button
               type="button"
               disabled={switching}

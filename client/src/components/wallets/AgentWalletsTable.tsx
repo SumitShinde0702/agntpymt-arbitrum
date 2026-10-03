@@ -100,9 +100,9 @@ export function AgentWalletsTable({ agents, treasuryAddress, onFunded }: Props) 
       </div>
       {treasuryAddress && (
         <div className="border-t border-slate-100 px-5 py-3 text-xs text-slate-500">
-          <strong>USDC</strong> — payment balance. <strong>ETH gas</strong> — sends free Base Sepolia
+          <strong>USDC</strong> — payment balance. <strong>ETH gas</strong> — sends free Arbitrum Sepolia
           ETH from treasury (default 0.001) so the agent can sign payments. Fund treasury from the
-          Coinbase faucet below (no mainnet ETH).
+          Arbitrum Sepolia faucet below (no mainnet ETH).
         </div>
       )}
     </div>

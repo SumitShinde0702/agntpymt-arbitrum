@@ -1,6 +1,7 @@
 import { eq } from "@agntpymt/db";
 import { getDb, schema } from "@agntpymt/db";
 import { createAgentWallet, fetchWalletBalances } from "../chain/wallet.js";
+import { SETTLEMENT_CHAIN_NAME } from "../chain/network.js";
 import { env } from "../config.js";
 
 export async function provisionAgentWallet(agentId: string) {
@@ -64,7 +65,7 @@ export async function getWalletsOverview(orgId: string = env.orgId) {
   );
 
   return {
-    network: "Base Sepolia",
+    network: SETTLEMENT_CHAIN_NAME,
     treasury: treasuryAddress
       ? { address: treasuryAddress, balances: treasuryBalances }
       : null,

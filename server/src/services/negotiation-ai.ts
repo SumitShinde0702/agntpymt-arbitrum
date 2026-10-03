@@ -76,7 +76,7 @@ function buildPrompt(ctx: NegotiationContext): { system: string; user: string } 
     `Prefer micro-payments near ${formatUsdc(ctx.targetFeeUsd)}. Auto-approve limit is ${formatUsdc(ctx.autoApproveLimitUsd)}.`;
 
   const system = `You write one chat message for an AI agent commerce demo (1-2 sentences).
-Payments are in USDC on Base Sepolia. Sound like a real business chat — respond directly to what the other party just said.
+Payments are in USDC on Arbitrum. Sound like a real business chat — respond directly to what the other party just said.
 Do not repeat yourself. Do not ignore questions. No markdown, no role labels, no quotes around the message.
 
 Buyer agent rules (when writing as buyer):

@@ -1,9 +1,9 @@
-export const BASE_SEPOLIA_EXPLORER = "https://sepolia.basescan.org";
+export const ARBITRUM_SEPOLIA_EXPLORER = "https://sepolia.arbiscan.io";
 
 export function txExplorerUrl(txHash: string) {
-  return `${BASE_SEPOLIA_EXPLORER}/tx/${txHash}`;
+  return `${ARBITRUM_SEPOLIA_EXPLORER}/tx/${txHash}`;
 }
 
 export function addressExplorerUrl(address: string) {
-  return `${BASE_SEPOLIA_EXPLORER}/address/${address}`;
+  return `${ARBITRUM_SEPOLIA_EXPLORER}/address/${address}`;
 }

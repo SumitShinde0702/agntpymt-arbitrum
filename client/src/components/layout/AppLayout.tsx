@@ -102,7 +102,7 @@ export function AppLayout() {
               <span className="text-slate-500">Network</span>
               <span className="flex items-center gap-1.5 font-medium text-slate-800">
                 <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                {health?.network ?? "Base Sepolia"}
+                {health?.network ?? "Arbitrum Sepolia"}
               </span>
             </div>
             <div className="mb-3 flex items-center justify-between">

@@ -1,0 +1,12 @@
+{
+  "name": "@agntpymt/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "hardhat compile",
+    "test": "hardhat test",
+    "coverage": "hardhat coverage",
+    "deploy:arbitrum-sepolia": "hardhat run scripts/deploy.ts --network arbitrumSepolia",
+    "deploy:robinhood-testnet": "hardhat run scripts/deploy.ts --network robinhoodTestnet"
+  }
+}

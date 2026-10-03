@@ -1,5 +1,6 @@
 import type { Agent } from "@agntpymt/db";
 import { env } from "../../config.js";
+import { SETTLEMENT_CHAIN, SETTLEMENT_CHAIN_NAME } from "../network.js";
 import {
   ERC8004_REGISTRATION_TYPE,
   erc8004AgentRegistryRef,
@@ -21,7 +22,7 @@ export function buildRegistrationFile(
   options?: { agentId?: bigint | number | null; includeWallet?: boolean }
 ): Erc8004RegistrationFile {
   const agentId = options?.agentId != null ? Number(options.agentId) : null;
-  const chainId = 84532;
+  const chainId = SETTLEMENT_CHAIN.id;
   const services: Erc8004RegistrationFile["services"] = [];
 
   if (options?.includeWallet !== false && agent.walletAddress) {
@@ -43,7 +44,7 @@ export function buildRegistrationFile(
   return {
     type: ERC8004_REGISTRATION_TYPE,
     name: agent.name,
-    description: agent.description?.trim() || `${agent.name} — governed agent on AgntPymt (Base Sepolia).`,
+    description: agent.description?.trim() || `${agent.name} — governed agent on AgntPymt (${SETTLEMENT_CHAIN_NAME}).`,
     x402Support: true,
     active: true,
     services,

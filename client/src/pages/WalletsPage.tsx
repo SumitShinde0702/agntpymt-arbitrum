@@ -7,14 +7,14 @@ import { PageSkeleton } from "../components/ui/Skeleton";
 
 const FAUCETS = [
   {
-    name: "Coinbase ETH Faucet",
-    url: "https://portal.cdp.coinbase.com/products/faucet",
-    desc: "Free Base Sepolia ETH for gas — no mainnet ETH required",
+    name: "Arbitrum Sepolia ETH Faucet",
+    url: "https://www.alchemy.com/faucets/arbitrum-sepolia",
+    desc: "Free Arbitrum Sepolia ETH for gas — no mainnet ETH required",
   },
   {
     name: "Circle USDC Faucet",
     url: "https://faucet.circle.com/",
-    desc: "Free Base Sepolia USDC for payments",
+    desc: "Free Arbitrum Sepolia USDC for payments (select Arbitrum Sepolia)",
   },
 ];
 
@@ -68,7 +68,7 @@ export function WalletsPage() {
       <div className="rounded-2xl border border-slate-200 bg-white p-5">
         <h2 className="mb-1 font-semibold">Fund your treasury first</h2>
         <p className="mb-3 text-xs text-slate-500">
-          Use free Base Sepolia test funds only — never mainnet ETH. After the faucet, use{" "}
+          Use free Arbitrum Sepolia test funds only — never mainnet ETH. After the faucet, use{" "}
           <strong>ETH gas</strong> / <strong>USDC</strong> on each agent row.
         </p>
         <div className="grid gap-3 sm:grid-cols-2">

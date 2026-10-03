@@ -263,7 +263,7 @@ export function Erc8004Panel({
     {
       id: "register",
       title: "Mint identity NFT",
-      description: "Treasury signs register() — creates ERC-8004 Agent ID on Base Sepolia.",
+      description: "Treasury signs register() — creates ERC-8004 Agent ID on Arbitrum Sepolia.",
       who: "Treasury MetaMask",
       state: stepState(registerDone, currentStep === "register"),
       txHash: status.registerTx,

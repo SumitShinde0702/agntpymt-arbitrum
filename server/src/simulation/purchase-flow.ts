@@ -6,6 +6,7 @@ import { logAudit } from "../services/audit.js";
 import { matchVendor, buildFulfillment } from "./vendor-matcher.js";
 import { formatUsdc } from "./pricing.js";
 import { settleViaX402 } from "../chain/x402.js";
+import { SETTLEMENT_CHAIN_NAME, txExplorerUrl } from "../chain/network.js";
 import { generateNegotiationMessage, type TranscriptLine } from "../services/negotiation-ai.js";
 import { recordBuyerRatesSeller } from "../services/erc8004.js";
 import { getOrgSettings } from "../services/org-settings.js";
@@ -464,7 +465,7 @@ export async function settlePurchase(params: {
           amountUsd: params.finalPrice,
           txHash,
           from: settled.from,
-          explorerUrl: `https://sepolia.basescan.org/tx/${txHash}`,
+          explorerUrl: txExplorerUrl(txHash),
           approvalId: params.approvalId,
         },
         source: params.source,
@@ -472,9 +473,9 @@ export async function settlePurchase(params: {
     } catch (err) {
       const reason = err instanceof Error ? err.message : "x402 settlement failed";
       const hint = reason.includes("Insufficient USDC")
-        ? " Fund the agent wallet with Base Sepolia USDC on the Wallets page."
-        : reason.includes("Base Sepolia ETH") || reason.includes("needs testnet ETH")
-        ? " Fund ETH gas on the Wallets page (Coinbase faucet → treasury → agent ETH gas)."
+        ? ` Fund the agent wallet with ${SETTLEMENT_CHAIN_NAME} USDC on the Wallets page.`
+        : reason.includes(`${SETTLEMENT_CHAIN_NAME} ETH`) || reason.includes("needs testnet ETH")
+        ? " Fund ETH gas on the Wallets page (Arbitrum Sepolia faucet → treasury → agent ETH gas)."
         : reason.includes("(402)")
           ? " Open Wallets → fund the running agent with more USDC + ETH, then retry."
           : reason.includes("not registered")

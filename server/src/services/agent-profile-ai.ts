@@ -117,7 +117,7 @@ export async function suggestAgentProfile(prompt: string): Promise<AgentProfileS
     return fallback;
   }
 
-  const system = `You help users configure autonomous payment agents for a USDC commerce demo on Base Sepolia.
+  const system = `You help users configure autonomous payment agents for a USDC commerce demo on Arbitrum.
 Given a short description of what the agent should do, return ONLY valid JSON (no markdown) with these fields:
 - name: string — display name like "Research Agent"
 - category: string — lowercase slug like research, procurement, travel, cloud, or a custom slug
@@ -292,7 +292,7 @@ export async function suggestSoulProfile(input: {
     return fallback;
   }
 
-  const system = `You write SOUL.md content for autonomous payment agents on AgntPymt (USDC micro-payments on Base Sepolia).
+  const system = `You write SOUL.md content for autonomous payment agents on AgntPymt (USDC micro-payments on Arbitrum).
 Return ONLY valid JSON (no markdown) with:
 - title: string — short display name (usually keep the existing agent name)
 - role: string — 2-4 sentences: who the agent is and what it buys (markdown ok, use **bold** for the name)

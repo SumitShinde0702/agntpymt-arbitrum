@@ -1,8 +1,6 @@
 import { createPublicClient, createWalletClient, formatUnits, http, parseUnits, type Address, type Hash } from "viem";
-import { baseSepolia } from "viem/chains";
 import { generatePrivateKey, privateKeyToAccount } from "viem/accounts";
-
-export const USDC_BASE_SEPOLIA = "0x036CbD53842c5426634e7929541eC2318f3dCF7e" as const;
+import { SETTLEMENT_CHAIN, SETTLEMENT_CHAIN_NAME, SETTLEMENT_RPC_URL, USDC_ADDRESS } from "./network.js";
 
 const erc20Abi = [
   {
@@ -25,9 +23,16 @@ const erc20Abi = [
 ] as const;
 
 export const publicClient = createPublicClient({
-  chain: baseSepolia,
-  transport: http(undefined, { timeout: 15_000 }),
+  chain: SETTLEMENT_CHAIN,
+  transport: http(SETTLEMENT_RPC_URL, { timeout: 15_000 }),
 });
+
+export function gasShortfallMessage(address: string, ethBalance: number): string {
+  return (
+    `Agent wallet ${address} needs free ${SETTLEMENT_CHAIN_NAME} ETH for gas (has ${ethBalance.toFixed(6)} ETH). ` +
+    "Open Wallets → fund treasury from an Arbitrum Sepolia faucet (no mainnet ETH), then click ETH gas."
+  );
+}
 
 export function createAgentWallet() {
   const privateKey = generatePrivateKey();
@@ -48,7 +53,7 @@ export async function fetchWalletBalances(address: string) {
     const [ethWei, usdcRaw] = await Promise.all([
       publicClient.getBalance({ address: addr }),
       publicClient.readContract({
-        address: USDC_BASE_SEPOLIA,
+        address: USDC_ADDRESS,
         abi: erc20Abi,
         functionName: "balanceOf",
         args: [addr],
@@ -74,9 +79,7 @@ export async function transferUsdcFromAgentWallet(
   const balances = await fetchWalletBalances(account.address);
 
   if (balances.eth < MIN_GAS_ETH) {
-    throw new Error(
-      `Agent wallet ${account.address} needs free Base Sepolia ETH for gas (has ${balances.eth.toFixed(6)} ETH). Open Wallets → fund treasury from Coinbase faucet (no mainnet ETH), then click ETH gas.`
-    );
+    throw new Error(gasShortfallMessage(account.address, balances.eth));
   }
 
   const amount = usdToUsdcUnits(amountUsd);
@@ -88,12 +91,12 @@ export async function transferUsdcFromAgentWallet(
 
   const walletClient = createWalletClient({
     account,
-    chain: baseSepolia,
-    transport: http(undefined, { timeout: 15_000 }),
+    chain: SETTLEMENT_CHAIN,
+    transport: http(SETTLEMENT_RPC_URL, { timeout: 15_000 }),
   });
 
   const hash = await walletClient.writeContract({
-    address: USDC_BASE_SEPOLIA,
+    address: USDC_ADDRESS,
     abi: erc20Abi,
     functionName: "transfer",
     args: [to, amount],

@@ -1,14 +1,14 @@
 import type { Address } from "viem";
-import { baseSepolia } from "viem/chains";
+import { SETTLEMENT_CHAIN } from "../network.js";
 
-/** ERC-8004 singleton deployments on Base Sepolia (v2.0.0). */
+/** ERC-8004 testnet singletons (CREATE2, identical on every testnet incl. Arbitrum Sepolia). */
 export const ERC8004_IDENTITY_REGISTRY =
   "0x8004A818BFB912233c491871b3d84c89A494BD9e" as const satisfies Address;
 
 export const ERC8004_REPUTATION_REGISTRY =
   "0x8004B663056A597Dffe9eCcC1965A193B7388713" as const satisfies Address;
 
-export const ERC8004_CHAIN = baseSepolia;
+export const ERC8004_CHAIN = SETTLEMENT_CHAIN;
 
 export const ERC8004_REGISTRATION_TYPE =
   "https://eips.ethereum.org/EIPS/eip-8004#registration-v1" as const;

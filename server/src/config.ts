@@ -24,7 +24,7 @@ export const env = {
   simulatePayments: process.env.SIMULATE_PAYMENTS !== "false",
   demoTransactionFeeUsd: Number(process.env.DEMO_TRANSACTION_FEE_USD ?? 0.01),
   evmPayToAddress: process.env.EVM_PAY_TO_ADDRESS ?? "",
-  facilitatorUrl: process.env.FACILITATOR_URL ?? "https://x402.org/facilitator",
+  facilitatorUrl: process.env.FACILITATOR_URL ?? "https://facilitator.payai.network",
   hermesApiUrl: process.env.HERMES_API_URL ?? "http://localhost:8642",
   hermesApiKey: process.env.HERMES_API_KEY ?? "",
   hermesProfilesDir: process.env.HERMES_PROFILES_DIR ?? "",

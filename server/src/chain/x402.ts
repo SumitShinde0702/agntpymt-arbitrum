@@ -8,9 +8,10 @@ import { ExactEvmScheme } from "@x402/evm/exact/client";
 import { ExactEvmScheme as ExactEvmServerScheme } from "@x402/evm/exact/server";
 import { privateKeyToAccount } from "viem/accounts";
 import { env } from "../config.js";
-import { fetchWalletBalances } from "./wallet.js";
+import { SETTLEMENT_CHAIN_NAME, X402_NETWORK } from "./network.js";
+import { fetchWalletBalances, gasShortfallMessage } from "./wallet.js";
 
-export const X402_NETWORK = "eip155:84532" as const;
+export { X402_NETWORK };
 
 /** Shown when OpenX402 facilitator requires payTo registration (not needed for x402.org / CDP). */
 export const OPENX402_REGISTER_URL = "https://openx402.ai/register";
@@ -125,7 +126,7 @@ async function assertFacilitatorReady(): Promise<void> {
     const detail = err instanceof Error ? err.message : String(err);
     throw new Error(
       `Facilitator at ${env.facilitatorUrl} failed (${detail}). ` +
-        "For testnet use FACILITATOR_URL=https://x402.org/facilitator or SIMULATE_PAYMENTS=true"
+        `The facilitator must support ${X402_NETWORK} (${SETTLEMENT_CHAIN_NAME}), e.g. FACILITATOR_URL=https://facilitator.payai.network, or set SIMULATE_PAYMENTS=true`
     );
   }
 }
@@ -168,9 +169,7 @@ export async function settleViaX402(
   const balances = await fetchWalletBalances(account.address);
 
   if (balances.eth < MIN_GAS_ETH) {
-    throw new Error(
-      `Agent wallet ${account.address} needs free Base Sepolia ETH for gas (has ${balances.eth.toFixed(6)} ETH). Open Wallets → fund treasury from Coinbase faucet (no mainnet ETH), then click ETH gas.`
-    );
+    throw new Error(gasShortfallMessage(account.address, balances.eth));
   }
 
   if (balances.usdc < amountUsd) {
@@ -203,7 +202,7 @@ export async function settleViaX402(
       const body = await response.text();
       let detail = formatX402Failure(response.status, body, response.headers);
       if (response.status === 402) {
-        detail += ` Agent wallet ${account.address} has ${balances.usdc.toFixed(4)} USDC and ${balances.eth.toFixed(6)} ETH on Base Sepolia — fund both on the Wallets page if low.`;
+        detail += ` Agent wallet ${account.address} has ${balances.usdc.toFixed(4)} USDC and ${balances.eth.toFixed(6)} ETH on ${SETTLEMENT_CHAIN_NAME} — fund both on the Wallets page if low.`;
       }
       throw new Error(detail);
     }

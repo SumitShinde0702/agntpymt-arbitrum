@@ -9,7 +9,7 @@ import {
 import { parseEther, parseUnits } from "viem";
 import { api } from "../../lib/api";
 import { erc20Abi } from "../../lib/erc20";
-import { TARGET_CHAIN, USDC_BASE_SEPOLIA } from "../../lib/wagmi";
+import { TARGET_CHAIN, USDC_ADDRESS } from "../../lib/wagmi";
 
 type Props = {
   agentId: string;
@@ -84,7 +84,7 @@ export function AgentWalletFund({ agentId, walletAddress, treasuryAddress, onFun
     const trimmed = usdcAmount.trim();
     if (!trimmed || Number(trimmed) <= 0) return;
     writeContract({
-      address: USDC_BASE_SEPOLIA,
+      address: USDC_ADDRESS,
       abi: erc20Abi,
       functionName: "transfer",
       args: [walletAddress as `0x${string}`, parseUnits(trimmed, 6)],

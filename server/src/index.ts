@@ -15,7 +15,7 @@ async function main() {
   const { getDb: initDb } = await import("@agntpymt/db");
   initDb();
 
-  try {
+  if (env.hermesEnabled) try {
     await migrateLegacyHermesProfiles();
     const provisionedCount = await ensureAllHermesProfiles(env.orgId);
     const db = getDb();

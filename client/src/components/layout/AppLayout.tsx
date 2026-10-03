@@ -148,7 +148,7 @@ export function AppLayout() {
                           : "Degraded"}
                     </span>
                   </div>
-                  {hermesProfiles && (
+                  {hermesProfiles && health?.hermesEnabled && (
                     <div className="flex items-center justify-between py-1">
                       <span className="text-slate-500">Hermes profiles</span>
                       <span className="font-medium text-slate-800">

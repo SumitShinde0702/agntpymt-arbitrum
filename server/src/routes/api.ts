@@ -69,11 +69,12 @@ apiRouter.get("/health", async (req, res) => {
   res.json({
     status: "ok",
     daemon:
-      hermes.online && hermes.authenticated !== false
+      !env.hermesEnabled || (hermes.online && hermes.authenticated !== false)
         ? "running"
         : hermes.online
           ? "auth_error"
           : "degraded",
+    hermesEnabled: env.hermesEnabled,
     hermes,
     hermesProfilesProvisioned,
     hermesProfilesTotal: agents.length,
@@ -119,7 +120,7 @@ apiRouter.patch("/treasury", async (req, res) => {
 apiRouter.get("/dashboard", async (req, res) => {
   const orgId = getOrgId(req);
   await ensureAllAgentWallets(orgId);
-  await ensureAllHermesProfiles(orgId);
+  if (env.hermesEnabled) await ensureAllHermesProfiles(orgId);
   const db = getDb();
   const agents = await db.select().from(schema.agents).where(eq(schema.agents.orgId, orgId));
   const approvals = await db

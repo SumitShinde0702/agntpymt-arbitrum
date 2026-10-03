@@ -14,6 +14,7 @@ function hermesHeaders(): Record<string, string> {
 }
 
 export async function checkHermesHealth(): Promise<HermesHealth> {
+  if (!env.hermesEnabled) return { online: false, status: "disabled" };
   try {
     const res = await fetch(`${env.hermesApiUrl}/health`, { signal: AbortSignal.timeout(2000) });
     if (!res.ok) return { online: false };

@@ -273,6 +273,7 @@ export type Erc8004AgentStatus = {
 export type HealthData = {
   status: string;
   daemon: string;
+  hermesEnabled?: boolean;
   hermesProfilesProvisioned?: number;
   hermesProfilesTotal?: number;
   simulatePayments: boolean;

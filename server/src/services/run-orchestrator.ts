@@ -1,6 +1,7 @@
 import { nanoid } from "nanoid";
 import { eq } from "@agntpymt/db";
 import { getDb, schema } from "@agntpymt/db";
+import { env } from "../config.js";
 import { logAudit } from "./audit.js";
 import { runEventBus } from "./event-bus.js";
 import { checkHermesHealth, startHermesRun, streamHermesRunEvents, type HermesRunEvent } from "./hermes.js";
@@ -275,6 +276,13 @@ export async function executeRun(runId: string, agentId: string, prompt: string)
   });
 
   setActiveRun(agentId, runId);
+
+  if (!env.hermesEnabled) {
+    await completeRunWithLocalLogic(runId, agentId, prompt, agent.category);
+    clearActiveRun(agentId, runId);
+    return { mode: "local" as const };
+  }
+
   await syncHermesGatewayMcpConfig(agentId);
 
   const hermes = await checkHermesHealth();

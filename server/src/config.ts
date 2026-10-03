@@ -25,6 +25,8 @@ export const env = {
   demoTransactionFeeUsd: Number(process.env.DEMO_TRANSACTION_FEE_USD ?? 0.01),
   evmPayToAddress: process.env.EVM_PAY_TO_ADDRESS ?? "",
   facilitatorUrl: process.env.FACILITATOR_URL ?? "https://facilitator.payai.network",
+  /** When false, runs use the built-in LLM negotiation runner and Hermes is never contacted. */
+  hermesEnabled: process.env.HERMES_ENABLED === "true",
   hermesApiUrl: process.env.HERMES_API_URL ?? "http://localhost:8642",
   hermesApiKey: process.env.HERMES_API_KEY ?? "",
   hermesProfilesDir: process.env.HERMES_PROFILES_DIR ?? "",

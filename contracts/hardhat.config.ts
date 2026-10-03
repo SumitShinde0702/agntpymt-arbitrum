@@ -6,7 +6,8 @@ import "@nomicfoundation/hardhat-toolbox";
 dotenv.config({ path: path.resolve(__dirname, "../.env.deployer") });
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
-const accounts = process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [];
+const deployerKey = process.env.DEPLOYER_PRIVATE_KEY?.trim();
+const accounts = deployerKey ? [deployerKey.startsWith("0x") ? deployerKey : `0x${deployerKey}`] : [];
 
 const config: HardhatUserConfig = {
   solidity: {

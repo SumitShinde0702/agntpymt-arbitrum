@@ -38,10 +38,12 @@ Agent (Hermes / MCP) ── "buy sector data" ──▶ AgntPymt control plane
 
 ### Deployed contracts
 
-| Network | AgentSpendPolicy | Token |
-| --- | --- | --- |
-| Arbitrum Sepolia (421614) | see [`contracts/deployments/arbitrumSepolia.json`](contracts/deployments/) | USDC `0x75fa…AA4d` |
-| Robinhood Chain testnet (46630) | see [`contracts/deployments/robinhoodTestnet.json`](contracts/deployments/) | MockUSDC |
+| Network | AgentSpendPolicy | Token | Source verified |
+| --- | --- | --- | --- |
+| Arbitrum Sepolia (421614) | [`0x542A4322762b255f8bA53F6A236B6191c8Cd0e1c`](https://sepolia.arbiscan.io/address/0x542A4322762b255f8bA53F6A236B6191c8Cd0e1c) | USDC `0x75faf114eafb1BDbe2F0316DF893fd58CE46AA4d` | [Sourcify exact match](https://repo.sourcify.dev/421614/0x542A4322762b255f8bA53F6A236B6191c8Cd0e1c) |
+| Robinhood Chain testnet (46630) | [`0x7F67212561DcD231a9316a54A4A336F7059A4234`](https://explorer.testnet.chain.robinhood.com/address/0x7F67212561DcD231a9316a54A4A336F7059A4234#code) | MockUSDC [`0x542A…0e1c`](https://explorer.testnet.chain.robinhood.com/address/0x542A4322762b255f8bA53F6A236B6191c8Cd0e1c#code) | Blockscout |
+
+Deployment records: [`contracts/deployments/`](contracts/deployments/).
 
 ERC-8004 registries (Arbitrum Sepolia): Identity `0x8004A818BFB912233c491871b3d84c89A494BD9e`, Reputation `0x8004B663056A597Dffe9eCcC1965A193B7388713`.
 

@@ -1,6 +1,6 @@
 # HackQuest submission — Arbitrum Open House Singapore Buildathon
 
-Copy-paste source for the submission form. Fill the `TODO` addresses after deployment.
+Copy-paste source for the submission form.
 
 ## Project name
 AgntPymt
@@ -10,8 +10,8 @@ Governed payments for AI agents: spending limits, human approvals and kill switc
 
 ## Links
 - Repo: https://github.com/SumitShinde0702/agntpymt-arbitrum
-- AgentSpendPolicy (Arbitrum Sepolia): TODO `https://sepolia.arbiscan.io/address/0x...`
-- AgentSpendPolicy (Robinhood Chain testnet): TODO `https://explorer.testnet.chain.robinhood.com/address/0x...`
+- AgentSpendPolicy (Arbitrum Sepolia): https://sepolia.arbiscan.io/address/0x542A4322762b255f8bA53F6A236B6191c8Cd0e1c (source: https://repo.sourcify.dev/421614/0x542A4322762b255f8bA53F6A236B6191c8Cd0e1c)
+- AgentSpendPolicy (Robinhood Chain testnet): https://explorer.testnet.chain.robinhood.com/address/0x7F67212561DcD231a9316a54A4A336F7059A4234#code
 - Demo video: TODO
 
 ## Problem
@@ -55,4 +55,4 @@ Sumit Shinde — TODO: one-line background + X/LinkedIn
 3. **(0:30) Agent Console, auto-approve.** Research Agent: "Buy premium sector research data". The seller quotes $0.02 and the agent counters $0.01. The feed shows "Authorized on Arbitrum", then "Payment sent", then "Settlement recorded on Arbitrum". Click the Arbiscan link.
 4. **(1:00) Human approval.** Cloud Ops: "Pay AWS invoice" at $0.08. The feed shows "On-chain approval required". Approve in the UI, then show "Approved on Arbitrum" and the settlement. Show the `SpendApproved` event on Arbiscan.
 5. **(1:30) Kill switch.** Pause the org and run again. "Denied by policy" appears.
-6. **(1:45) Payments page.** Payment, rating and policy txs per row. Close: "Live at agntpymt.com, contracts verified on Arbiscan and Robinhood Chain."
+6. **(1:45) Payments page.** Payment, rating and policy txs per row. Close: "Contracts verified on Arbiscan and Robinhood Chain, code at github.com/SumitShinde0702/agntpymt-arbitrum."

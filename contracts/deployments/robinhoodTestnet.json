@@ -1,0 +1,9 @@
+{
+  "network": "robinhoodTestnet",
+  "chainId": 46630,
+  "AgentSpendPolicy": "0x7F67212561DcD231a9316a54A4A336F7059A4234",
+  "token": "0x542A4322762b255f8bA53F6A236B6191c8Cd0e1c",
+  "deployer": "0x90E289d524610802cC9468A37B34f8597Eaca901",
+  "deployedAt": "2026-10-03T15:51:43.510Z",
+  "txHash": "0x4a39a1b83ca04b8ba256b99de836ed0cb8b60b2ac2a2265eeee180fbff3b7a93"
+}

@@ -20,6 +20,12 @@ type Props = {
 
 const DEFAULT_ETH = "0.001";
 
+function walletErrorText(err: Error): string {
+  const e = err as Error & { shortMessage?: string; details?: string };
+  const text = [e.shortMessage ?? e.message, e.details].filter(Boolean).join(" — ");
+  return text.length > 240 ? `${text.slice(0, 240)}…` : text;
+}
+
 function TxLink({ hash }: { hash: `0x${string}` }) {
   return (
     <a
@@ -159,8 +165,8 @@ export function AgentWalletFund({ agentId, walletAddress, treasuryAddress, onFun
         </button>
       </div>
 
-      {usdcError && <span className="text-xs text-red-600">{usdcError.message.slice(0, 72)}</span>}
-      {ethError && <span className="text-xs text-red-600">{ethError.message.slice(0, 72)}</span>}
+      {usdcError && <span className="max-w-xs break-words text-xs text-red-600">{walletErrorText(usdcError)}</span>}
+      {ethError && <span className="max-w-xs break-words text-xs text-red-600">{walletErrorText(ethError)}</span>}
       {usdcSuccess && usdcHash && <TxLink hash={usdcHash} />}
       {ethSuccess && ethHash && <TxLink hash={ethHash} />}
     </div>

@@ -1,5 +1,4 @@
 import { Navigate, Routes, Route } from "react-router-dom";
-import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 import { AppLayout } from "./components/layout/AppLayout";
 import { LandingPage } from "./pages/LandingPage";
@@ -20,29 +19,11 @@ import { showSellerAdmin } from "./lib/features";
 
 const clerkEnabled = Boolean(import.meta.env.VITE_CLERK_PUBLISHABLE_KEY);
 
-/** `/` → Clerk sign-in when auth is on; signed-in users go to dashboard. */
-function RootEntry() {
-  if (!clerkEnabled) {
-    return <Navigate to="/dashboard" replace />;
-  }
-
-  return (
-    <>
-      <SignedIn>
-        <Navigate to="/dashboard" replace />
-      </SignedIn>
-      <SignedOut>
-        <Navigate to="/sign-in" replace />
-      </SignedOut>
-    </>
-  );
-}
-
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<RootEntry />} />
-      <Route path="/home" element={<LandingPage />} />
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/home" element={<Navigate to="/" replace />} />
       {clerkEnabled && (
         <>
           <Route path="/sign-in/*" element={<SignInPage />} />

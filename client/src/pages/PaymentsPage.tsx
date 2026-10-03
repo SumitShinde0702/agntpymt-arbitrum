@@ -101,7 +101,7 @@ export function PaymentsPage() {
         </div>
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-4">
         <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
           <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">Payments</div>
           <div className="mt-1 text-2xl font-bold text-slate-900">{payments.length}</div>
@@ -114,6 +114,12 @@ export function PaymentsPage() {
           <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">Rated on-chain</div>
           <div className="mt-1 text-2xl font-bold text-slate-900">
             {payments.filter((p) => p.feedbackTxHash).length}
+          </div>
+        </div>
+        <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+          <div className="text-xs font-semibold uppercase tracking-wide text-slate-500">Governed on Arbitrum</div>
+          <div className="mt-1 text-2xl font-bold text-slate-900">
+            {payments.filter((p) => p.policyTxHash).length}
           </div>
         </div>
       </div>
@@ -151,6 +157,7 @@ export function PaymentsPage() {
                   <th className="px-4 py-3">Status</th>
                   <th className="px-4 py-3">Payment tx</th>
                   <th className="px-4 py-3">Rating tx</th>
+                  <th className="px-4 py-3">Policy tx</th>
                   <th className="px-4 py-3">Run</th>
                 </tr>
               </thead>
@@ -180,6 +187,13 @@ export function PaymentsPage() {
                     <td className="px-4 py-3">
                       {p.feedbackTxHash ? (
                         <TxLink hash={p.feedbackTxHash} label={`${p.feedbackTxHash.slice(0, 10)}…`} />
+                      ) : (
+                        <span className="text-slate-400">—</span>
+                      )}
+                    </td>
+                    <td className="px-4 py-3">
+                      {p.policyTxHash ? (
+                        <TxLink hash={p.policyTxHash} label={`${p.policyTxHash.slice(0, 10)}…`} />
                       ) : (
                         <span className="text-slate-400">—</span>
                       )}

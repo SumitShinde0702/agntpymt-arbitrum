@@ -43,6 +43,7 @@ export const agents = pgTable("agents", {
   erc8004UriTx: text("erc8004_uri_tx"),
   erc8004WalletTx: text("erc8004_wallet_tx"),
   erc8004RegisteredAt: text("erc8004_registered_at"),
+  spendPolicyBound: boolean("spend_policy_bound").notNull().default(false),
   createdAt: text("created_at").notNull(),
 });
 
@@ -93,6 +94,7 @@ export const sellerSessions = pgTable("seller_sessions", {
   finalPriceUsd: doublePrecision("final_price_usd"),
   status: text("status").notNull().default("negotiating"),
   fulfillmentPayload: text("fulfillment_payload"),
+  policyRequestId: text("policy_request_id"),
   createdAt: text("created_at").notNull(),
 });
 
@@ -125,6 +127,7 @@ export const transactions = pgTable("transactions", {
   status: text("status").notNull(),
   txHash: text("tx_hash"),
   feedbackTxHash: text("feedback_tx_hash"),
+  policyTxHash: text("policy_tx_hash"),
   createdAt: text("created_at").notNull(),
 });
 

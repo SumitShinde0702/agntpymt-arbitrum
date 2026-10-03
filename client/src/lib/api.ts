@@ -235,6 +235,7 @@ export type Transaction = {
   status: string;
   txHash: string | null;
   feedbackTxHash: string | null;
+  policyTxHash: string | null;
   createdAt: string;
 };
 

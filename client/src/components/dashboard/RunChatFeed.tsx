@@ -33,6 +33,14 @@ const STEP_LABELS: Record<string, string> = {
   payment_pending: "Awaiting approval",
   payment_denied: "Payment denied",
   policy_denied: "Denied by policy",
+  onchain_policy_synced: "On-chain policy synced",
+  onchain_policy_authorized: "Authorized on Arbitrum",
+  onchain_policy_pending: "On-chain approval required",
+  onchain_policy_approved: "Approved on Arbitrum",
+  onchain_policy_rejected: "Rejected on Arbitrum",
+  onchain_policy_settled: "Settlement recorded on Arbitrum",
+  onchain_policy_denied: "Denied by on-chain policy",
+  onchain_policy_unavailable: "On-chain policy unavailable",
   order_fulfilled: "Order delivered",
   run_completed: "Run complete",
   run_failed: "Run failed",
@@ -141,6 +149,7 @@ function classifyEvent(event: RunEvent, agentName?: string): ChatRole {
   if (
     actor === "AgntPymt" ||
     actor.startsWith("AgntPymt ") ||
+    actor.startsWith("AgentSpendPolicy") ||
     actor === "Hermes" ||
     event.step === "hermes_delegated" ||
     !actor
@@ -156,7 +165,9 @@ function isFailureStep(step: string) {
     step === "run_failed" ||
     step === "hermes_approval_denied" ||
     step === "payment_denied" ||
-    step === "policy_denied"
+    step === "policy_denied" ||
+    step === "onchain_policy_denied" ||
+    step === "onchain_policy_rejected"
   );
 }
 
@@ -165,7 +176,10 @@ function isSuccessStep(step: string) {
     step === "run_completed" ||
     step === "payment_settled" ||
     step === "order_fulfilled" ||
-    step === "hermes_approval_granted"
+    step === "hermes_approval_granted" ||
+    step === "onchain_policy_authorized" ||
+    step === "onchain_policy_approved" ||
+    step === "onchain_policy_settled"
   );
 }
 

@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import type { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 
+dotenv.config({ path: path.resolve(__dirname, "../.env.deployer") });
 dotenv.config({ path: path.resolve(__dirname, "../.env") });
 
 const accounts = process.env.DEPLOYER_PRIVATE_KEY ? [process.env.DEPLOYER_PRIVATE_KEY] : [];
@@ -13,6 +14,9 @@ const config: HardhatUserConfig = {
     settings: { optimizer: { enabled: true, runs: 200 } },
   },
   networks: {
+    hardhat: {
+      chainId: Number(process.env.HARDHAT_CHAIN_ID || 31337),
+    },
     arbitrumSepolia: {
       url: process.env.ARBITRUM_SEPOLIA_RPC_URL || "https://sepolia-rollup.arbitrum.io/rpc",
       chainId: 421614,

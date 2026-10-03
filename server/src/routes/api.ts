@@ -3,6 +3,7 @@ import { eq, desc, and, getDb, schema, inArray, gte, type AuditLog } from "@agnt
 import { z } from "zod";
 import { env } from "../config.js";
 import { SETTLEMENT_CHAIN, SETTLEMENT_CHAIN_NAME } from "../chain/network.js";
+import { spendPolicyInfo } from "../chain/spend-policy.js";
 import { checkHermesHealth } from "../services/hermes.js";
 import { createRun } from "../services/run-orchestrator.js";
 import { runEventBus } from "../services/event-bus.js";
@@ -85,6 +86,7 @@ apiRouter.get("/health", async (req, res) => {
     chainId: SETTLEMENT_CHAIN.id,
     vendorPayToAddress: env.evmPayToAddress || null,
     erc8004IdentityRegistry: "0x8004A818BFB912233c491871b3d84c89A494BD9e",
+    spendPolicy: spendPolicyInfo(),
   });
 });
 

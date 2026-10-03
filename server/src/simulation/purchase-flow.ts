@@ -10,6 +10,12 @@ import { SETTLEMENT_CHAIN_NAME, txExplorerUrl } from "../chain/network.js";
 import { generateNegotiationMessage, type TranscriptLine } from "../services/negotiation-ai.js";
 import { recordBuyerRatesSeller } from "../services/erc8004.js";
 import { getOrgSettings } from "../services/org-settings.js";
+import {
+  approveOnchain,
+  authorizeOnchain,
+  cancelOnchain,
+  recordOnchainSettlement,
+} from "../services/onchain-policy.js";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -325,9 +331,37 @@ export async function runPurchaseFlow(params: PurchaseParams) {
     );
   }
 
-  if (overAutoApprove || overDailyCap) {
+  const onchain = await authorizeOnchain({
+    runId: params.runId,
+    agentId: params.agentId,
+    source: params.source,
+    agent,
+    vendor,
+    sessionId,
+    amountUsd: finalPrice,
+    limits: {
+      autoApproveUsd: policy.autoApproveLimitUsd,
+      dailyCapUsd: dailyCap,
+      orgCeilingUsd: orgCeiling,
+    },
+  });
+
+  if (onchain.kind === "denied") {
+    await db
+      .update(schema.sellerSessions)
+      .set({ quotedPriceUsd: vendor.listPriceUsd, finalPriceUsd: finalPrice, status: "denied" })
+      .where(eq(schema.sellerSessions.id, sessionId));
+    throw new PolicyDeniedError(`On-chain AgentSpendPolicy rejected the spend (${onchain.reason})`);
+  }
+
+  const onchainPending = onchain.kind === "pending";
+
+  if (overAutoApprove || overDailyCap || onchainPending) {
     const approvalId = nanoid();
     const reasonParts: string[] = [];
+    if (onchainPending && !overAutoApprove && !overDailyCap) {
+      reasonParts.push("requires on-chain admin approval");
+    }
     if (overAutoApprove) {
       reasonParts.push(
         `exceeds auto-approve limit ${formatUsdc(policy.autoApproveLimitUsd)}`
@@ -494,6 +528,14 @@ export async function settlePurchase(params: {
     }
   }
 
+  const policyTxHash = await recordOnchainSettlement({
+    runId: params.runId,
+    agentId: params.agentId,
+    source: params.source,
+    sessionId: params.sessionId,
+    settlementRef: txHash ?? `simulated:${params.sessionId}`,
+  });
+
   const fulfillment = buildFulfillment(params.vendor, params.purchaseIntent, params.finalPrice);
 
   const fulfillmentDetail =
@@ -573,6 +615,7 @@ export async function settlePurchase(params: {
     status: env.simulatePayments ? "simulated" : "completed",
     txHash,
     feedbackTxHash,
+    policyTxHash,
     createdAt: new Date().toISOString(),
   });
 
@@ -610,6 +653,10 @@ export async function approveAndSettle(approvalId: string) {
 
   const vendors = await db.select().from(schema.vendors);
   const vendor = vendors.find((v) => v.name === approval.vendorName) ?? vendors[0];
+
+  if (approval.runId && session) {
+    await approveOnchain({ runId: approval.runId, agentId: approval.agentId, sessionId: session.id });
+  }
 
   await db
     .update(schema.approvals)
@@ -667,6 +714,13 @@ export async function denyApproval(approvalId: string) {
       .update(schema.sellerSessions)
       .set({ status: "denied" })
       .where(eq(schema.sellerSessions.id, approval.sellerSessionId));
+    if (approval.runId) {
+      await cancelOnchain({
+        runId: approval.runId,
+        agentId: approval.agentId,
+        sessionId: approval.sellerSessionId,
+      });
+    }
   }
 
   if (approval.runId) {

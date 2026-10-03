@@ -11,6 +11,7 @@ export type PaymentRow = {
   status: string;
   txHash: string | null;
   feedbackTxHash: string | null;
+  policyTxHash: string | null;
   createdAt: string;
 };
 
@@ -38,6 +39,7 @@ export async function listPaymentsForOrg(orgId: string): Promise<PaymentRow[]> {
     status: row.status,
     txHash: row.txHash,
     feedbackTxHash: row.feedbackTxHash,
+    policyTxHash: row.policyTxHash,
     createdAt: row.createdAt,
   }));
 }
@@ -60,6 +62,7 @@ export function paymentsToCsv(rows: PaymentRow[]): string {
     "Status",
     "Payment tx",
     "Rating tx",
+    "Policy tx",
     "Run ID",
     "Transaction ID",
   ];
@@ -73,6 +76,7 @@ export function paymentsToCsv(rows: PaymentRow[]): string {
       row.status,
       row.txHash ?? "",
       row.feedbackTxHash ?? "",
+      row.policyTxHash ?? "",
       row.runId ?? "",
       row.id,
     ]

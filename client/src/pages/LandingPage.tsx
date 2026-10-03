@@ -16,9 +16,9 @@ import { Logo } from "../components/brand/Logo";
 const features = [
   {
     icon: Shield,
-    title: "Policy-gated spending",
+    title: "On-chain spend policy",
     description:
-      "Per-agent auto-approve limits, negotiation rules, and human-in-the-loop approvals before funds move.",
+      "Per-agent limits, kill switches, and human approvals enforced by the AgentSpendPolicy contract on Arbitrum before funds move.",
   },
   {
     icon: Wallet,
